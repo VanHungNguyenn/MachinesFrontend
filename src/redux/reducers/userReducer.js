@@ -1,11 +1,20 @@
+import ACTIONS from 'redux/actions'
+
 const initialState = {
-	user: [],
+	username: '',
 	isLogged: false,
-	token: '',
 }
 
 const userReducer = (state = initialState, action) => {
-	return state
+	switch (action.type) {
+		case ACTIONS.LOGIN:
+			return {
+				...state,
+				isLogged: true,
+			}
+		default:
+			return state
+	}
 }
 
 export default userReducer

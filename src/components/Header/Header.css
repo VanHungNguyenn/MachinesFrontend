@@ -1,6 +1,6 @@
 .header {
     padding: .5rem 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     background: #ccc;
 }
 
@@ -20,6 +20,11 @@
     color: #3b6fb3;
 }
 
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
 .navbar .nav-item:not(:last-child) {
     margin-right: 1rem;
 }
@@ -28,4 +33,16 @@
     color: #000;
     transition: all 0.25s ease-in-out;
     font-weight: 500;
+}
+
+.header_username_block {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header_username {
+    margin-left: .2rem;
+    font-size: 1rem;
+    font-style: italic;
 }

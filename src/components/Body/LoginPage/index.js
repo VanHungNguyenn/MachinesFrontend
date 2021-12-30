@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import { Container } from 'reactstrap'
-import { URL } from 'constants/config'
 
 import './LoginPage.css'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
+import { showErrorMsg, showSuccessMsg } from 'components/utils/Notification'
+import { dispatchLogin } from 'redux/actions/userActions'
 
 const initialState = {
 	name: '',
@@ -22,15 +23,26 @@ function LoginPage(props) {
 
 	const handleSubmit = async ({ name, password }) => {
 		try {
-			console.log('Hello')
-
-			const res = await axios.post(`${URL}/user/login`, {
+			const res = await axios.post('/user/login', {
 				name,
 				password: password,
 			})
-			console.log(res.data)
+			setUser({
+				...user,
+			})
+
+			showSuccessMsg(res.data.msg)
+
+			localStorage.setItem('firstLogin', true)
+
+			dispatch(dispatchLogin())
+			history.push('/dashboard')
 		} catch (error) {
-			console.log(error.response.data.msg)
+			error.response.data.msg &&
+				setUser({
+					...user,
+				})
+			showErrorMsg(error.response.data.msg)
 		}
 	}
 
